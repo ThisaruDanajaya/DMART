@@ -4,6 +4,8 @@ import 'dart:async';
 import './landingscreen.dart';
 import 'package:flutter/material.dart';
 
+import 'landingpage.dart';
+
 class welcomescreen extends StatefulWidget {
   const welcomescreen({Key? key}) : super(key: key);
 
@@ -18,7 +20,7 @@ class _welcomescreenState extends State<welcomescreen> {
   void initState(){
     final _timer = Timer(const Duration(milliseconds: 4000),() {
       //navigate to the next window
-    Navigator.of(context).pushReplacementNamed(landindscreen.routeName);
+    Navigator.of(context).pushReplacementNamed(LandingPage.routeName);
     });
     super.initState();
   }

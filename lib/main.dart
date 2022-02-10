@@ -2,6 +2,7 @@ import 'package:final_projrct/tabs/log/landingscreen.dart';
 import 'package:final_projrct/tabs/log/loginp.dart';
 import 'package:flutter/material.dart';
 
+import 'tabs/log/landingpage.dart';
 import 'tabs/log/welcomescreen.dart';
 
 void main() {
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'DMART',
       theme: ThemeData(
         fontFamily: 'Montserrat',
         primarySwatch: Colors.deepPurple,
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
       ),
       home: welcomescreen(),
       routes: {
-        landindscreen.routeName: (context) => landindscreen(),
+        LandingPage.routeName: (context) => LandingPage(),
       },
     );
   }

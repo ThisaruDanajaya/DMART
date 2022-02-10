@@ -1,5 +1,5 @@
 import 'package:final_projrct/tabs/log/loginp.dart';
-import 'package:final_projrct/widgets/Helper.dart';
+import 'package:final_projrct/widgets/helper.dart';
 import 'package:final_projrct/widgets/consrants.dart';
 import 'package:flutter/material.dart';
 

@@ -17,9 +17,9 @@ class Constants {
   );
 
   static const regularDarkText = TextStyle(
-    fontSize: 18.0,
-    fontWeight: FontWeight.w900,
-    color: Colors.white,
+    fontSize: 14.0,
+    fontWeight: FontWeight.w700,
+    color: Colors.black,
   );
 
   static const regularhintText = TextStyle(
@@ -29,8 +29,7 @@ class Constants {
   );
 
   static const regularnomal = TextStyle(
-    fontSize: 18.0,
-
+    fontSize: 14.0,
     fontWeight: FontWeight.w400,
     color: Colors.white70,
   );

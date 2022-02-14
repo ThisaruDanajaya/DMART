@@ -1,8 +1,12 @@
-import 'package:final_projrct/tabs/log/signup.dart';
+// ignore_for_file: deprecated_member_use
+import 'package:final_projrct/pages/log/signup.dart';
 import 'package:final_projrct/widgets/consrants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+
+import 'loginginputbox.dart';
 
 class loging extends StatefulWidget {
   static const routeName = "/loging";
@@ -11,14 +15,28 @@ class loging extends StatefulWidget {
   State<loging> createState() => _logingState();
 }
 
+final GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['Email']);
+
 class _logingState extends State<loging> {
+  final double circularBorderRadius;
+
+  _logingState({
+    this.circularBorderRadius = 20.0,
+  });
+
   Future<void> _alertDialogBuilder(String error) async {
     return showDialog(
         context: context,
         barrierDismissible: false,
         builder: (context) {
           return AlertDialog(
-            title: Text("Error"),
+            actionsAlignment: MainAxisAlignment.center,
+            title: const Text(
+              "Error",
+              style: Constants.DarkText,
+            ),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(circularBorderRadius)),
             content: Container(
               child: Text(error),
             ),
@@ -27,8 +45,20 @@ class _logingState extends State<loging> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text("close Dialog"),
-              )
+                child: const SizedBox(
+                  width: 120.0,
+                  height: 70.0,
+                  child: Card(
+                    color: Colors.deepPurpleAccent,
+                    child: Center(
+                      child: Text(
+                        'close Dialog',
+                        style: TextStyle(color: Colors.white),
+                      ), //Text
+                    ), //Center
+                  ),
+                ),
+              ),
             ],
           );
         });
@@ -95,6 +125,7 @@ class _logingState extends State<loging> {
 
   @override
   Widget build(BuildContext context) {
+    GoogleSignIn? user = _googleSignIn.currentUser as GoogleSignIn?;
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -160,8 +191,7 @@ class _logingState extends State<loging> {
                       onPressed: () {
                         _submitform();
                       },
-                      isLoading: _registerformloading,
-                      child: Text("Logging"),
+                      child: const Text("Logging"),
                     ),
                   ),
                   const SizedBox(
@@ -173,24 +203,27 @@ class _logingState extends State<loging> {
                       style: Constants.regularnomal,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 80,
                   ),
                   const Text(
                     "or Login With",
                     style: Constants.regularnomal,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 50,
                   ),
                   SizedBox(
                     height: 50,
                     width: double.infinity,
                     child: ElevatedButton(
+                      onPressed: () async {
+                        await _googleSignIn.signIn();
+                        setState(() {});
+                      },
                       style: ButtonStyle(
                           backgroundColor:
                               MaterialStateProperty.all(Colors.white)),
-                      onPressed: () {},
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -198,18 +231,18 @@ class _logingState extends State<loging> {
                             width: 35,
                             child: Image.asset("assets/images/google.png"),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
-                          Text(
+                          const Text(
                             "Loging with Google",
                             style: Constants.regularDarkText,
-                          )
+                          ),
                         ],
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 100,
                   ),
                   GestureDetector(
@@ -233,99 +266,15 @@ class _logingState extends State<loging> {
                               color: Colors.white,
                               fontSize: 16,
                               fontWeight: FontWeight.w700),
-                        )
+                        ),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class Emailin extends StatelessWidget {
-  final Function(String)? onChanged;
-  final Function(String)? onSubmitted;
-  final FocusNode? focusNode;
-  final TextInputAction? textInputAction;
-
-  Emailin({
-    this.focusNode,
-    this.onChanged,
-    this.onSubmitted,
-    this.textInputAction,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      height: 50,
-      decoration: const ShapeDecoration(
-        color: Colors.white60,
-        shape: StadiumBorder(),
-      ),
-      child: TextField(
-        focusNode: focusNode,
-        onChanged: onChanged,
-        onSubmitted: onSubmitted,
-        textInputAction: textInputAction,
-        decoration: const InputDecoration(
-            border: InputBorder.none,
-            hintText: "Your Email",
-            hintStyle: TextStyle(
-              color: Colors.black45,
-            ),
-            contentPadding: EdgeInsets.only(left: 30)),
-      ),
-    );
-  }
-}
-
-class Passwordin extends StatelessWidget {
-  final Function(String)? onChanged;
-  final Function(String)? onSubmitted;
-  final FocusNode? focusNode;
-  final TextInputAction? textInputAction;
-  final bool? isPasswordField;
-
-  Passwordin({
-    this.focusNode,
-    this.onChanged,
-    this.onSubmitted,
-    this.textInputAction,
-    this.isPasswordField,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-
-    bool _isPasswordField = isPasswordField ?? false;
-
-    return Container(
-      width: double.infinity,
-      height: 50,
-      decoration: const ShapeDecoration(
-        color: Colors.white60,
-        shape: StadiumBorder(),
-      ),
-      child: TextField(
-        focusNode: focusNode,
-        onChanged: onChanged,
-        onSubmitted: onSubmitted,
-        textInputAction: textInputAction,
-        obscureText: _isPasswordField,
-        decoration: const InputDecoration(
-            border: InputBorder.none,
-            hintText: "Enter Your Password",
-            hintStyle: TextStyle(
-              color: Colors.black45,
-            ),
-            contentPadding: EdgeInsets.only(left: 30)),
       ),
     );
   }

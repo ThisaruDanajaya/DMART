@@ -1,9 +1,6 @@
-import 'package:final_projrct/tabs/log/landingscreen.dart';
-import 'package:final_projrct/tabs/log/loginp.dart';
 import 'package:flutter/material.dart';
-
-import 'tabs/log/landingpage.dart';
-import 'tabs/log/welcomescreen.dart';
+import 'pages/log/landingpage.dart';
+import 'pages/log/welcomescreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,6 +13,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'DMART',
       theme: ThemeData(
         fontFamily: 'Montserrat',

@@ -33,4 +33,10 @@ class Constants {
     fontWeight: FontWeight.w400,
     color: Colors.white70,
   );
+
+  static const DarkText = TextStyle(
+    fontSize: 18.0,
+    fontWeight: FontWeight.w900,
+    color: Colors.black,
+  );
 }
